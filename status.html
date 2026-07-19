@@ -21,27 +21,22 @@ body{
 }
 
 .box{
-
-background:white;
-padding:30px;
-width:400px;
-margin:auto;
-border-radius:10px;
-box-shadow:0 0 10px gray;
-
+    background:white;
+    padding:30px;
+    width:400px;
+    margin:auto;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+    text-align:center;
 }
 
 h1{
-
-margin-bottom:20px;
-
+    margin-bottom:20px;
 }
 
 #status{
-
-font-size:30px;
-color:green;
-
+    font-size:30px;
+    color:green;
 }
 
 </style>
@@ -56,7 +51,7 @@ color:green;
 
 <h2 id="orderNo"></h2>
 
-<h3 id="status"></h3>
+<div id="status"></div>
 
 </div>
 
@@ -64,49 +59,56 @@ color:green;
 
 async function loadStatus(){
 
-let orderNo=localStorage.getItem("lastOrder");
+    let orderNo = localStorage.getItem("lastOrder");
 
-if(!orderNo){
+    if(!orderNo){
+        document.getElementById("status").innerHTML = "ยังไม่มีออเดอร์";
+        return;
+    }
 
-document.getElementById("status").innerHTML="ยังไม่มีออเดอร์";
+    try{
 
-return;
+        let res = await fetch("https://coffee-time-tmt5.onrender.com/order/" + orderNo);
 
-}
+        if(!res.ok){
+            document.getElementById("status").innerHTML = "❌ ไม่พบออเดอร์";
+            return;
+        }
 
-let res = await fetch("https://coffee-time-69oq.onrender.com/order/" + orderNo)
+        let order = await res.json();
 
-if(!res.ok){
-    document.getElementById("status").innerHTML = "❌ ไม่พบออเดอร์";
-    return;
-}
+        document.getElementById("orderNo").innerHTML =
+        "เลขออเดอร์ : " + order.orderNo;
 
-let order = await res.json();
+        let color = "orange";
 
-document.getElementById("orderNo").innerHTML=order.orderNo;
+        if(order.status=="🟡 รอรับออเดอร์"){
+            color="gold";
+        }
 
-let color = "orange";
+        if(order.status=="🔵 กำลังทำ"){
+            color="dodgerblue";
+        }
 
-if(order.status=="🟡 รอรับออเดอร์"){
-    color="gold";
-}
+        if(order.status=="🟢 เสร็จแล้ว"){
+            color="green";
+        }
 
-if(order.status=="🔵 กำลังทำ"){
-    color="dodgerblue";
-}
+        document.getElementById("status").innerHTML = `
+            <div style="color:${color};font-size:32px;font-weight:bold;">
+                ${order.status}
+            </div>
+            <p>ยอดรวม ${order.total} บาท</p>
+        `;
 
-if(order.status=="🟢 เสร็จแล้ว"){
-    color="green";
-}
+    }catch(error){
 
-document.getElementById("status").innerHTML=
-`
-<div style="color:${color};font-size:32px;font-weight:bold;">
-${order.status}
-</div>
+        document.getElementById("status").innerHTML =
+        "❌ เชื่อมต่อเซิร์ฟเวอร์ไม่ได้";
 
-<p>ยอดรวม ${order.total} บาท</p>
-`;
+        console.log(error);
+
+    }
 
 }
 
@@ -117,5 +119,4 @@ setInterval(loadStatus,1000);
 </script>
 
 </body>
-
 </html>
