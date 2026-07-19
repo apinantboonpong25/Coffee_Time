@@ -207,7 +207,7 @@ let ok = confirm(
 
     if(ok){
 
-        fetch("https://coffee-time-klty.onrender.com/order", {
+        fetch("https://coffee-time-tmt5.onrender.com/order", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -288,7 +288,7 @@ function clearCart(){
 }
 async function changeStatus(orderNo, status){
 
-    await fetch("https://coffee-time-klty.onrender.com/order/" + orderNo, {
+    await fetch("https://coffee-time-tmt5.onrender.com/order/" + orderNo, {
 
         method:"PUT",
 
@@ -316,7 +316,7 @@ async function checkStatus(){
         return;
     }
 
-    let res = await fetch("https://coffee-time-klty.onrender.com/order/" + orderNo);
+    let res = await fetch("https://coffee-time-tmt5.onrender.com/order/" + orderNo);
 
     if(!res.ok){
         return;
