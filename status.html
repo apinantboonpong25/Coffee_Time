@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ติดตามออเดอร์</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    padding:30px;
+
+    background:
+        linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)),
+        url("images/background1.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.box{
+
+background:white;
+padding:30px;
+width:400px;
+margin:auto;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+
+}
+
+h1{
+
+margin-bottom:20px;
+
+}
+
+#status{
+
+font-size:30px;
+color:green;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>☕ Coffee Time ☕</h1>
+
+<h2 id="orderNo"></h2>
+
+<h3 id="status"></h3>
+
+</div>
+
+<script>
+
+async function loadStatus(){
+
+let orderNo=localStorage.getItem("lastOrder");
+
+if(!orderNo){
+
+document.getElementById("status").innerHTML="ยังไม่มีออเดอร์";
+
+return;
+
+}
+
+let res = await fetch("http://192.168.1.115:3000/order/" + orderNo);
+
+if(!res.ok){
+    document.getElementById("status").innerHTML = "❌ ไม่พบออเดอร์";
+    return;
+}
+
+let order = await res.json();
+
+document.getElementById("orderNo").innerHTML=order.orderNo;
+
+let color = "orange";
+
+if(order.status=="🟡 รอรับออเดอร์"){
+    color="gold";
+}
+
+if(order.status=="🔵 กำลังทำ"){
+    color="dodgerblue";
+}
+
+if(order.status=="🟢 เสร็จแล้ว"){
+    color="green";
+}
+
+document.getElementById("status").innerHTML=
+`
+<div style="color:${color};font-size:32px;font-weight:bold;">
+${order.status}
+</div>
+
+<p>ยอดรวม ${order.total} บาท</p>
+`;
+
+}
+
+loadStatus();
+
+setInterval(loadStatus,1000);
+
+</script>
+
+</body>
+
+</html>

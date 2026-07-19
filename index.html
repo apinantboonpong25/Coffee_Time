@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ Coffee Time ☕</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>☕ Coffee Time ☕</h1>
+    <p>ยินดีต้อนรับสู่ร้าน ☕ Coffee Time หรือ ช่วงเวลาดื่มกาแฟ ☕ </p>
+</header>
+
+<!-- Cart -->
+<div class="cart-icon" onclick="showCartBox()">
+    🛒
+    <span id="cartCount">0</span>
+</div>
+
+<div class="cart-box" id="cartBox">
+
+    <h2>🛒 ตะกร้าสินค้า</h2>
+
+    <ul id="cartList"></ul>
+
+    <hr>
+
+    <h3>
+        รวมทั้งหมด
+        <span id="total">0</span>
+        บาท
+    </h3>
+
+    <button onclick="checkout()">
+💳 ยืนยันการสั่งสินค้า
+</button>
+
+<br><br>
+
+<button onclick="window.location.href='status.html'">
+📦 ติดตามออเดอร์
+</button>
+
+</div>
+
+<!-- Promotion -->
+<section class="promotion">
+
+<h2>🎉 โปรโมชั่นพิเศษ</h2>
+
+<div class="promo-container">
+
+<div class="promo-card">
+<h3>☕ ลด 10%</h3>
+<p>ซื้อครบ 200 บาท รับส่วนลด 10%</p>
+</div>
+
+<div class="promo-card">
+<h3>🎂 โปรเฉพาะวันเกิด ลด 20%</h3>
+<p>แสดงบัตรประชาชน รับส่วนลด 20%</p>
+<p>ซื้อ 1 แก้ว แถม 1 แก้ว (เฉพาะวันเกิด)</p>
+</div>
+
+<div class="promo-card">
+<h3>👨‍🎓 โปรนักเรียน / นักศึกษา ลด 15%</h3>
+<p>แสดงบัตรนักเรียน ลด 15%</p>
+<p>ทุกวันจันทร์–ศุกร์ เวลา 07:00–09:00 ลด 15%</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- Search -->
+<section style="text-align:center">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 ค้นหาเมนู..."
+onkeyup="searchMenu()">
+
+</section>
+
+<!-- Menu -->
+<section class="menu">
+
+<h2>☕ เมนูเครื่องดื่ม ☕</h2>
+
+<!-- Americano -->
+<div class="card">
+
+<img src="images/americano.jpg">
+
+<h3>☕ Americano</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetAmericano">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeAmericano">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Americano',50,'sweetAmericano','typeAmericano')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Espresso -->
+<div class="card">
+
+<img src="images/Espresso.jpg">
+
+<h3>☕ Espresso</h3>
+
+<p>ราคา 60 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetEspresso">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeEspresso">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Espresso',60,'sweetEspresso','typeEspresso')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Cappuccino -->
+<div class="card">
+
+<img src="images/Cappuccino.jpg">
+
+<h3>☕ Cappuccino</h3>
+<p>ราคา 60 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetCappuccino">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeCappuccino">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Cappuccino',60,'sweetCappuccino','typeCappuccino')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<img src="images/Mocha.jpg">
+<script src="script.js"></script>
+</body>
+</html>
+
+<!-- Mocha -->
+<div class="card">
+
+<img src="images/Latte.jpg">
+
+<h3>☕ Latte</h3>
+
+<p>ราคา 60 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetMocha">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeMocha">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Mocha',60,'sweetMocha','typeMocha')">
+เพิ่มลงตะกร้า
+</button>
+
+</div> 
+
+<!-- Orange Americanoe -->
+<div class="card">
+
+<img src="images/Orange Americanoe.jpg">
+
+<h3>🍊 Orange Americanoe</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetOrange Americanoe">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeOrange Americanoe">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Orange Americanoe',50,'sweetOrange Americanoe','typeOrange Americanoe')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Hazelnut Latte -->
+<div class="card">
+
+<img src="images/Hazelnut Latte.jpg">
+
+<h3>🌰 Hazelnut Latte</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetHazelnut Latte">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeHazelnut Latte">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Hazelnut Latte',50,'sweetHazelnut Latte','typeHazelnut Latte')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Caramel Macchiato -->
+<div class="card">
+
+<img src="images/Caramel Macchiato.jpg">
+
+<h3>🍯 Caramel Macchiato</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetCaramel Macchiato">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeCaramel Macchiato">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Caramel Macchiato',50,'sweetCaramel Macchiato','typeCaramel Macchiato')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Vanilla Latte -->
+<div class="card">
+
+<img src="images/Vanilla Latte.jpg">
+
+<h3>🥛 Vanilla Latte</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetVanilla Latte">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeVanilla Latte">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Vanilla Latte',50,'sweetVanilla Latte','typeVanilla Latte')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Matcha Latte -->
+<<div class="card">
+
+<img src="images/Matcha Latte.jpg">
+
+<h3>🍵 Matcha Latte</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetMatcha Latte">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeMatcha Latte">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Matcha Latte',50,'sweetMatcha Latte','typeMatcha Latte')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Cocoa -->
+<div class="card">
+
+<img src="images/Cocoa.jpg">
+
+<h3>🍫 Cocoa</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetCocoa">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeCocoa">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Cocoa',50,'sweetCocoa','typeCocoa')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Honey Lemon Tea -->
+<<div class="card">
+
+<img src="images/Honey Lemon Te.jpg">
+
+<h3>🍋 Honey Lemon Tea</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetHoney Lemon Te">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeHoney Lemon Te">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Honey Lemon Te',50,'sweetHoney Lemon Te','typeHoney Lemon Te')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Peach Tea -->
+<<div class="card">
+
+<img src="images/Peach Tea.jpg">
+
+<h3>🍑 Peach Tea</h3>
+
+<p>ราคา 50 บาท</p>
+<label>เลือกประเภท</label>
+<select id="sweetPeach Tea">
+<option value="0">🍬 หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typePeach Tea">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Peach Tea',50,'sweetPeach Tea','typePeach Tea')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Blueberry Soda -->
+<<div class="card">
+
+<img src="images/Blueberry Soda.jpg">
+
+<h3>🫐 Blueberry Soda</h3>
+
+<p>ราคา 50 บาท</p>
+
+<label>เลือกประเภท</label>
+
+<select id="sweetBlueberry Soda">
+<option value="0">🍬 หวาน หวาน 0%</option>
+<option value="20">🍬 หวาน 20%</option>
+<option value="50">🍬 หวาน 50%</option>
+<option value="100">🍬 หวาน 100%</option>
+</select>
+<select id="typeBlueberry Soda">
+<option value="ร้อน">☕ ร้อน</option>
+<option value="เย็น">🧊 เย็น</option>
+<option value="ปั่น">🥤 ปั่น</option>
+</select>
+
+<button onclick="addCart('Blueberry Soda',50,'sweetBlueberry Soda','typeBlueberry Soda')">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+<!-- Menu -->
+<section class="menu">
+    
+
+<h2> 🍕 เมนูของทานเล่น 🍕</h2>
+<!-- French Fries -->
+<div class="card">
+<img src="images/French Fries.jpg">
+<h3>🍟 French Fries</h3>
+<p>ราคา 59 บาท</p>
+
+<button onclick="addCart('French Fries',59)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Chicken Nuggets -->
+<div class="card">
+<img src="images/Chicken Nugget.jpg">
+<h3>🍗 Chicken Nuggets</h3>
+<p>ราคา 59 บาท</p>
+
+<button onclick="addCart('Chicken Nuggets',79)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Garlic Bread -->
+<div class="card">
+<img src="images/Garlic Bread.jpg">
+<h3>🥖 Garlic Bread</h3>
+<p>ราคา 49 บาท</p>
+
+<button onclick="addCart('Garlic Bread',49)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Croissant -->
+<div class="card">
+<img src="images/Croissant.jpg">
+<h3>🥐 Croissant</h3>
+<p>ราคา 55 บาท</p>
+
+<button onclick="addCart('Croissant',55)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Chocolate Cake -->
+<div class="card">
+<img src="images/Chocolate Cake.jpg">
+<h3>🍰 Chocolate Cake</h3>
+<p>ราคา 59 บาท</p>
+
+<button onclick="addCart('Chocolate Cake',89)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Cheese Cake -->
+<div class="card">
+<img src="images/Cheese Cake.jpg">
+<h3>🧀 Cheese Cake</h3>
+<p>ราคา 55 บาท</p>
+
+<button onclick="addCart('Cheese Cake',95)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Honey Toast -->
+<div class="card">
+<img src="images/Honey Toast.jpg">
+<h3>🍞 Honey Toast</h3>
+<p>ราคา 49 บาท</p>
+
+<button onclick="addCart('Honey Toast',129)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Waffle -->
+<div class="card">
+<img src="images/Waffle.jpg">
+<h3>🧇 Waffle</h3>
+<p>ราคา 39 บาท</p>
+
+<button onclick="addCart('Waffle',79)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Donut -->
+<div class="card">
+<img src="images/Donut.jpg">
+<h3>🍩 Donut</h3>
+<p>ราคา 29 บาท</p>
+
+<button onclick="addCart('Donut',39)">
+เพิ่มลงตะกร้า
+</button>
+</div>
+
+<!-- Sandwich -->
+<div class="card">
+<img src="images/Ham Cheese Sandwich.jpg">
+<h3>🥪 Ham Cheese Sandwich</h3>
+<p>ราคา 49 บาท</p>
+
+<hr>
+
+<button onclick="checkout()">
+🛒 สั่งซื้อ
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

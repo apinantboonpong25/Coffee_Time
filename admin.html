@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Time Admin</title>
+
+    <style>
+
+     body{
+    font-family: Arial;
+    padding:30px;
+    color:#333;
+
+    background:
+        linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)),
+        url("images/background.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+        h1{
+            text-align:center;
+        }
+
+       .order{
+    background:
+        linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)),
+        url("images/admin-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    padding:20px;
+    margin:20px auto;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+        button{
+            padding:8px 15px;
+            margin:5px;
+            cursor:pointer;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1>☕ Coffee Time หลังบ้าน ☕</h1>
+
+<div id="orders"></div>
+
+<script>
+
+async function loadOrders(){
+
+    let res = await fetch("https://coffee-time-klty.onrender.com/orders");
+
+    let data = await res.json();
+
+    let html = "";
+
+    data.forEach(order=>{
+
+        html += `
+
+<div class="order">
+
+<h2>${order.orderNo}</h2>
+
+<p>🟡 สถานะ : ${order.status}</p>
+
+<button onclick="changeStatus('${order.orderNo}','กำลังทำ')">
+▶ กำลังทำ
+</button>
+
+<button onclick="changeStatus('${order.orderNo}','เสร็จแล้ว')">
+✅ เสร็จแล้ว
+</button>
+
+<p><b>ยอดรวม ${order.total} บาท</b></p>
+
+<ul>
+
+${order.items.map(item=>`
+
+<li>
+${item.name} x${item.quantity}
+(${item.sweet}%)
+</li>
+
+`).join("")}
+
+</ul>
+
+</div>
+
+`;
+
+    });
+
+    document.getElementById("orders").innerHTML = html;
+
+}
+
+// โหลดข้อมูลครั้งแรก
+loadOrders();
+
+// รีเฟรชทุก 1 วินาที
+setInterval(loadOrders,1000);
+
+async function changeStatus(orderNo, status){
+
+    await fetch("https://coffee-time-klty.onrender.com/order/" + orderNo,{
+
+        method:"PUT",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            status:status
+        })
+
+    });
+
+    loadOrders();
+
+}
+
+</script>
+
+</body>
+</html>
