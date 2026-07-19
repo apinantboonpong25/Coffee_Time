@@ -72,7 +72,7 @@ function showCart(){
         li.innerHTML=`
         <b>${item.name}</b><br>
         🍬 ความหวาน ${item.sweet}%<br>
-        🍽 จำนวน ${item.quantity} แก้ว<br>
+        🍽 จำนวน ${item.quantity} <br>
         💸 ${sum} บาท<br><br>
 
         <button onclick="plus(${index})">➕</button>

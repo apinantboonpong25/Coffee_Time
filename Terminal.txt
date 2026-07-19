@@ -4,3 +4,5 @@
 3. node server.js
 
 Update website and fix bugs
+
+<hr> <button onclick="checkout()"> 🛒 สั่งซื้อ </button> </div> <script src="script.js"></script> </body> </html>
