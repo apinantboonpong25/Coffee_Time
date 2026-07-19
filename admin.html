@@ -58,7 +58,7 @@
 
 async function loadOrders(){
 
-    let res = await fetch("https://coffee-time-klty.onrender.com/orders");
+    let res = await fetch("https://coffee-time-tmt5.onrender.com/orders");
 
     let data = await res.json();
 
@@ -115,7 +115,7 @@ setInterval(loadOrders,1000);
 
 async function changeStatus(orderNo, status){
 
-    await fetch("https://coffee-time-klty.onrender.com/order/" + orderNo,{
+    await fetch("https://coffee-time-tmt5.onrender.com/order/" + orderNo,{
 
         method:"PUT",
 
