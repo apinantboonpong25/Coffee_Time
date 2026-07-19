@@ -52,6 +52,13 @@
 
 <h1>☕ Coffee Time หลังบ้าน ☕</h1>
 
+<div style="text-align:center; margin-bottom:20px;">
+    <button onclick="clearOrders()"
+        style="background:red;color:white;padding:10px 20px;border:none;border-radius:8px;">
+        🗑️ เคลียร์ออเดอร์ทั้งหมด
+    </button>
+</div>
+
 <div id="orders"></div>
 
 <script>
@@ -112,6 +119,22 @@ loadOrders();
 
 // รีเฟรชทุก 1 วินาที
 setInterval(loadOrders,1000);
+
+async function clearOrders(){
+
+    if(!confirm("ต้องการลบออเดอร์ทั้งหมดใช่หรือไม่?")){
+        return;
+    }
+
+    await fetch("https://coffee-time-tmt5.onrender.com/orders",{
+        method:"DELETE"
+    });
+
+    alert("ล้างออเดอร์เรียบร้อยแล้ว");
+
+    loadOrders();
+
+}
 
 async function changeStatus(orderNo, status){
 
