@@ -5,28 +5,25 @@
 <title>ติดตามออเดอร์</title>
 
 <style>
-
 body{
     font-family: Arial;
     padding:30px;
-
     background:
         linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)),
         url("images/background1.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 }
 
 .box{
-    background:white;
-    padding:30px;
-    width:400px;
+    width:420px;
     margin:auto;
-    border-radius:10px;
-    box-shadow:0 0 10px gray;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
     text-align:center;
 }
 
@@ -34,15 +31,16 @@ h1{
     margin-bottom:20px;
 }
 
-#status{
-    font-size:30px;
-    color:green;
+#orderNo{
+    margin:15px 0;
 }
 
+#status{
+    margin-top:15px;
+}
 </style>
 
 </head>
-
 <body>
 
 <div class="box">
@@ -51,70 +49,77 @@ h1{
 
 <h2 id="orderNo"></h2>
 
-<div id="status"></div>
+<div id="status">กำลังโหลด...</div>
 
 </div>
 
 <script>
 
+const API = "https://coffee-time-tmt5.onrender.com";
+
 async function loadStatus(){
 
-    let orderNo = localStorage.getItem("lastOrder");
+    const orderNo = localStorage.getItem("lastOrder");
 
     if(!orderNo){
-        document.getElementById("status").innerHTML = "ยังไม่มีออเดอร์";
+        document.getElementById("orderNo").innerHTML = "";
+        document.getElementById("status").innerHTML =
+        "❌ ยังไม่มีออเดอร์";
         return;
     }
 
     try{
 
-        let res = await fetch("https://coffee-time-tmt5.onrender.com/order/" + orderNo);
+        const res = await fetch(API + "/order/" + orderNo);
 
         if(!res.ok){
-            document.getElementById("status").innerHTML = "❌ ไม่พบออเดอร์";
+            document.getElementById("status").innerHTML =
+            "❌ ไม่พบออเดอร์";
             return;
         }
 
-        let order = await res.json();
+        const order = await res.json();
 
         document.getElementById("orderNo").innerHTML =
         "เลขออเดอร์ : " + order.orderNo;
 
         let color = "orange";
 
-        if(order.status=="🟡 รอรับออเดอร์"){
-            color="gold";
-        }
+        switch(order.status){
+            case "🟡 รอรับออเดอร์":
+                color="gold";
+                break;
 
-        if(order.status=="🔵 กำลังทำ"){
-            color="dodgerblue";
-        }
+            case "🔵 กำลังทำ":
+                color="dodgerblue";
+                break;
 
-        if(order.status=="🟢 เสร็จแล้ว"){
-            color="green";
+            case "🟢 เสร็จแล้ว":
+                color="green";
+                break;
         }
 
         document.getElementById("status").innerHTML = `
-            <div style="color:${color};font-size:32px;font-weight:bold;">
+            <h2 style="color:${color}">
                 ${order.status}
-            </div>
-            <p>ยอดรวม ${order.total} บาท</p>
+            </h2>
+
+            <h3>ยอดรวม ${order.total} บาท</h3>
         `;
 
-    }catch(error){
+    }catch(err){
+
+        console.error(err);
 
         document.getElementById("status").innerHTML =
         "❌ เชื่อมต่อเซิร์ฟเวอร์ไม่ได้";
-
-        console.log(error);
 
     }
 
 }
 
 loadStatus();
-
-setInterval(loadStatus,1000);
+setInterval(loadStatus,3000);
 
 </script>
 
