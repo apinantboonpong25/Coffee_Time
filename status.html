@@ -74,7 +74,7 @@ return;
 
 }
 
-let res = await fetch("http://192.168.1.115:3000/order/" + orderNo);
+let res = await fetch("https://coffee-time-69oq.onrender.com/order/" + orderNo)
 
 if(!res.ok){
     document.getElementById("status").innerHTML = "❌ ไม่พบออเดอร์";
