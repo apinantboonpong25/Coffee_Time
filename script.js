@@ -69,7 +69,7 @@ function showCart(){
 
         let li=document.createElement("li");
 
-        li.innerHTML = `
+       li.innerHTML = `
 <div class="cart-header">
     <h3>${item.name}</h3>
 
@@ -79,9 +79,14 @@ function showCart(){
     </div>
 </div>
 
-🍬 ความหวาน ${item.sweet}%<br>
-🍽 จำนวน ${item.quantity}<br>
-💸 ${sum} บาท
+<div class="cart-info">
+    <span>🍬 ความหวาน ${item.sweet}%</span>
+    <span>🍽 จำนวน ${item.quantity}</span>
+</div>
+
+<div class="cart-price">
+    💸 ${sum} บาท
+</div>
 
 <hr>
 `;
