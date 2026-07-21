@@ -69,18 +69,22 @@ function showCart(){
 
         let li=document.createElement("li");
 
-        li.innerHTML=`
-        <b>${item.name}</b><br>
-        🍬 ความหวาน ${item.sweet}%<br>
-        🍽 จำนวน ${item.quantity} <br>
-        💸 ${sum} บาท<br><br>
+        li.innerHTML = `
+<div class="cart-header">
+    <h3>${item.name}</h3>
 
-        <button onclick="plus(${index})">➕</button>
+    <div class="qty-btn">
+        <button onclick="plus(${index})">+</button>
+        <button onclick="minus(${index})">−</button>
+    </div>
+</div>
 
-        <button onclick="minus(${index})">➖</button>
+🍬 ความหวาน ${item.sweet}%<br>
+🍽 จำนวน ${item.quantity}<br>
+💸 ${sum} บาท
 
-        <hr>
-        `;
+<hr>
+`;
 
         list.appendChild(li);
 

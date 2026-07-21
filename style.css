@@ -213,8 +213,8 @@ button:hover{
 }
 
 .cart-box h3{
-    margin-top:15px;
-    text-align:center;
+    margin:0;
+    text-align:left;
 }
 
 /* Footer */
@@ -275,4 +275,40 @@ footer{
         font-size:30px;
     }
 
+}
+.cart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.cart-header h3{
+    margin: 0;
+    font-size: 24px;
+}
+
+.qty-btn{
+    display: flex;
+    gap: 5px;
+}
+
+.qty-btn button{
+    width:28px;
+    height:28px;
+    min-width:28px;
+    margin:0;
+    padding:0;
+    line-height:28px;
+    font-size:16px;
+    border:none;
+    border-radius:6px;
+    background:#7b573c;
+    color:white;
+    cursor:pointer;
+    flex:none;
+}
+.qty-btn button:hover{
+    background:#5f422c;
+    transform:none;
 }
